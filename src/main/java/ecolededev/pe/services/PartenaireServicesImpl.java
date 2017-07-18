@@ -7,22 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ecolededev.pe.domaine.Partenaire;
+import ecolededev.pe.domaine.PartenaireRepository;
 
 @Service
 public class PartenaireServicesImpl implements IPartenaireServices{
 	
 	@Autowired
-	IConventionServices conventionServices;
+	PartenaireRepository partenaireRepository;
 
 	@Override
 	public List<Partenaire> listePartenaire(){
-		List<Partenaire> liste = new ArrayList();
-		liste.add(new Partenaire("AFPA", "Agence de Formatio Professionelle des Adultes"));
-		
-		
-		liste.add(new Partenaire("APEC", "Agence Pour l'Emploi des Cadres"));
+		List<Partenaire> liste = partenaireRepository.findAll();		
 		return liste;
 	}
+
+	@Override
+	public Partenaire getPartenaire(String partenaire) {
+		Partenaire p = partenaireRepository.findOneByPartenaire(partenaire);
+		return p;
+	}
+
 	
 	
 }

@@ -2,11 +2,33 @@ package ecolededev.pe.domaine;
 
 import java.util.List;
 
-public class Convention {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "convention")
+public class Convention implements java.io.Serializable {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+
 	private String convention;
 	private String objet;
 	private String status;
-	private List<Convention> listeConvention;
+	
+	@OneToOne(fetch=FetchType.EAGER, targetEntity=Contact.class)
+	@JoinColumn(name="convention_id")
+	Contact contact;
+	
 	
 	public Convention(String convention, String objet, String status) {
 		
@@ -36,14 +58,20 @@ public class Convention {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public List<Convention> getListeConvention() {
-		return listeConvention;
+	public Convention() {
 	}
-	public void setListeConvention(List<Convention> listeConvention) {
-		this.listeConvention = listeConvention;
+	public Long getId() {
+		return id;
 	}
-	
-	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Contact getContact() {
+		return contact;
+	}
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
 	
 	
 	

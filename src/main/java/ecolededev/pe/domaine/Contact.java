@@ -1,7 +1,25 @@
 package ecolededev.pe.domaine;
 
-public class Contact {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "contact")
+public class Contact implements java.io.Serializable {
+
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@Column(name="nom")
 	private String nom;
 	private String prenom;
 	private String fonction;
@@ -11,6 +29,7 @@ public class Contact {
 	private int fixe;
 	private String commentaire;
 	private boolean pe;
+		
 	
 	public String getNom() {
 		return nom;
@@ -66,6 +85,7 @@ public class Contact {
 	public void setPe(boolean pe) {
 		this.pe = pe;
 	}
+	
 	public Contact(String nom, String prenom, String fonction, String direction, String mail, int mobile, int fixe,
 			String commentaire, boolean pe) {
 		this.nom = nom;
@@ -85,6 +105,16 @@ public class Contact {
 				+ ", mail=" + mail + ", mobile=" + mobile + ", fixe=" + fixe + ", commentaire=" + commentaire + ", pe="
 				+ pe + "]";
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Contact() {
+	}
+	
+	
 	
 
 }
