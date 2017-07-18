@@ -13,24 +13,24 @@
         <div th:replace="fragments/components :: alert (type='danger', message='Sign in error. Please try again.')">Alert</div>
     </th:block>
     <fieldset>
-        <legend>Please Sign In</legend>
+        <legend>Identifiez-vous SVP ?</legend>
         <div class="form-group">
-            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+            <label for="inputEmail" class="col-lg-2 control-label">Votre courriel	:</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="username" />
+                <input type="text" class="form-control" id="inputEmail" placeholder="Courriel" name="username" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+            <label for="inputPassword" class="col-lg-2 control-label">Mot de passe:</label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" />
+                <input type="password" class="form-control" id="inputPassword" placeholder="Mot de passe" name="password" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="_spring_security_remember_me" /> Remember me
+                        <input type="checkbox" name="_spring_security_remember_me" /> Se souvenir de moi.
                     </label>
                 </div>
             </div>

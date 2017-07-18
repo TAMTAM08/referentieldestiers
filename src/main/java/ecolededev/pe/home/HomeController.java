@@ -2,34 +2,49 @@ package ecolededev.pe.home;
 
 import java.security.Principal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+
+import ecolededev.pe.services.IPartenaireServices;
+import ecolededev.pe.services.IConventionServices;
+
+import ecolededev.pe.services.IContactServices;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 class HomeController {
 
+	@Autowired
+	private IPartenaireServices partenaireServices;
+	@Autowired
+	private IConventionServices conventionServices;
+	@Autowired
+	private IContactServices contactServices;
+
+
 	@ModelAttribute("module")
 	String module() {
 		return "home";
-	}
+	} // module()
 
 	@GetMapping("/")
-	String index(Principal principal) {
-		return principal != null ? "home/homeSignedIn" : "home/homeNotSignedIn";
-	}
-
-	@PostMapping("sinformer")
-	String sinformer(@ModelAttribute SignupForm signupForm, Errors errors, RedirectAttributes ra) {
-		if (errors.hasErrors()) {
-			return SIGNUP_VIEW_NAME;
-		}
-		Account account = accountService.save(signupForm.createAccount());
-		accountService.signin(account);
-        // see /WEB-INF/i18n/messages.properties and /WEB-INF/views/homeSignedIn.html
-        MessageHelper.addSuccessAttribute(ra, "signup.success");
-		return "redirect:/";
-	}
-
-}
+	String index(Principal principal, Model model) {
+		if (principal == null) {
+			return "home/homeNotSignedIn";
+		} else {
+			HomeForm homeForm = (HomeForm) model.asMap().get("homeForm");
+			if (homeForm == null) {
+				homeForm = new HomeForm();
+				model.addAttribute(homeForm);
+				homeForm.setListePartenaires(partenaireServices.listePartenaire());
+				homeForm.setListeConventions(conventionServices.listeConvention());		
+				homeForm.setListeContacts(contactServices.listeContacts());
+			} // if
+			return "home/homeSignedIn";
+		} // if
+	} // index ()
+} // HomeController
