@@ -8,11 +8,33 @@ import ecolededev.pe.domaine.Convention;
 import ecolededev.pe.domaine.Partenaire;
 
 public class HomeForm {
-	private String partenaire;
+	private String codePartenaire;
+	private Partenaire objetPartenaire;
 	private List<Partenaire> listePartenaires = new ArrayList<>();
 	private List<Convention> listeConventions = new ArrayList<>();
-	private List<Contact> listeContacts =  new ArrayList<>();
-	private Partenaire objetPartenaire = new Partenaire();
+	private List<Contact> listeContacts = new ArrayList<>();
+	
+	
+
+	public Partenaire getObjetPartenaire() {
+		return objetPartenaire;
+	}
+
+
+	public void setObjetPartenaire(Partenaire objetPartenaire) {
+		this.objetPartenaire = objetPartenaire;
+	}
+
+
+	public String getCodePartenaire() {
+		return codePartenaire;
+	}
+
+
+	public void setCodePartenaire(String codePartenaire) {
+		this.codePartenaire = codePartenaire;
+	}
+
 
 	public List<Convention> getListeConventions() {
 		return listeConventions;
@@ -25,7 +47,7 @@ public class HomeForm {
 
 
 	public List<Contact> getListeContacts() {
-		return listeContacts;  
+		return listeContacts;
 	}
 
 
@@ -41,26 +63,6 @@ public class HomeForm {
 	
 	public void setListePartenaires(List<Partenaire> listePartenaires) {
 		this.listePartenaires = listePartenaires;
-	}
-
-
-	public String getPartenaire() {
-		return partenaire;
-	}
-
-
-	public void setPartenaire(String partenaire) {
-		this.partenaire = partenaire;
-	}
-
-
-	public Partenaire getObjetPartenaire() {
-		return objetPartenaire;
-	}
-
-
-	public void setObjetPartenaire(Partenaire objetPartenaire) {
-		this.objetPartenaire = objetPartenaire;
 	}
 	
 	

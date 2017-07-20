@@ -21,13 +21,30 @@
 			<div
 				th:replace="fragments/components :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
 		</th:block>
-		<form method="post" th:action="@{/rechercher}" th:object="${homeForm}">
 		<div>
 			<p>
-				Sélection du partenaire <input type="text" id="partenaire"
-					name="partenaire" /><input type="submit" name="rechercher" value="Rechercher">
+			<form action="/findpartenaire" >
+				Sélection du partenaire <input type="text" />
+				<input type="submit" value="Rechercher">
+			</form>
+			<div class="dropdown">
+
+				<select th:field="*{homeForm.listePartenaires}" class="form-control">
+
+					<option th:each="element : ${homeForm.listePartenaires}"
+						th:value="${element.partenaire}"
+						th:text="${element.partenaire + ' - ' + element.description}">
+					</option>
+				</select> <select th:field="*{homeForm.listeConventions}"
+					class="form-control">
+
+					<option th:each="element : ${homeForm.listeConventions}"
+						th:value="${element.convention}"
+						th:text="${element.convention + ' - ' + element.objet}">
+					</option>
+				</select>
+			</div>
 		</div>
-		</form>
 		<div>
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#description">Description</a></li>
@@ -38,24 +55,26 @@
 						actions</a></li>
 				<li><a data-toggle="tab" href="#services">Services</a></li>
 			</ul>
+
 			<div class="tab-content">
 				<div id="description" class="tab-pane fade in active">
 					<h3>Présentation partenaire</h3>
-					<br> <input type="text" th:value="${homeForm.objetPartenaire.description}" size="100"/>
+					<br> <input type="text"" />
 					<h3>Cadre de la relation</h3>
 					<br> <input type="text" />
-				<h3>Contacts du Client/Partenaire</h3>
-				<div class="row">
-					<div class="col-sm-1">Nom</div>
-					<div class="col-sm-1">Prénom</div>
-					<div class="col-sm-1">Fonction</div>
-					<div class="col-sm-1">Direction</div>
-					<div class="col-sm-2">Mail</div>
-					<div class="col-sm-1">Mobile</div>
-					<div class="col-sm-1">Fixe</div>
-					<div class="col-sm-3">Commentaire</div>
 				</div>
-
+				<h3>Contacts du Client/Partenaire</h3>
+				<br> <b></h4>
+					<div class="row">
+						<div class="col-sm-1">Nom</div>
+						<div class="col-sm-1">Prénom</div>
+						<div class="col-sm-1">Fonction</div>
+						<div class="col-sm-1">Direction</div>
+						<div class="col-sm-2">Mail</div>
+						<div class="col-sm-1">Mobile</div>
+						<div class="col-sm-1">Fixe</div>
+						<div class="col-sm-3">Commentaire</div>
+					</div></b>
 				<div class="form-control">
 					<div class="row" th:each="element : ${homeForm.listeContacts}"
 						th:if="${!element.pe}">
@@ -70,16 +89,17 @@
 					</div>
 				</div>
 				<h3>Contacts Pôle-Emploi</h3>
-				<div class="row">
-					<div class="col-sm-1">Nom</div>
-					<div class="col-sm-1">Prénom</div>
-					<div class="col-sm-1">Fonction</div>
-					<div class="col-sm-1">Direction</div>
-					<div class="col-sm-2">Mail</div>
-					<div class="col-sm-1">Mobile</div>
-					<div class="col-sm-1">Fixe</div>
-					<div class="col-sm-3">Commentaire</div>
-				</div>
+				<br> <b></h4>
+					<div class="row">
+						<div class="col-sm-1">Nom</div>
+						<div class="col-sm-1">Prénom</div>
+						<div class="col-sm-1">Fonction</div>
+						<div class="col-sm-1">Direction</div>
+						<div class="col-sm-2">Mail</div>
+						<div class="col-sm-1">Mobile</div>
+						<div class="col-sm-1">Fixe</div>
+						<div class="col-sm-3">Commentaire</div>
+					</div></b>
 				<div class="form-control">
 					<div class="row" th:each="element : ${homeForm.listeContacts}"
 						th:if="${element.pe}">
@@ -92,36 +112,27 @@
 						<div class="col-sm-1" th:text="${element.fixe}"></div>
 						<div class="col-sm-3" th:text="${element.commentaire}"></div>
 					</div>
-
 				</div>
-				</div>
-
+			</div>
 			<div id="contacts" class="tab-pane fade">
 				<h3>Menu 1</h3>
 				<p>Some content in menu 1.</p>
 			</div>
-
-
 			<div id="suiviactivite" class="tab-pane fade">
 				<h3>Menu 2</h3>
 				<p>Some content in menu 2.</p>
 			</div>
-
-
 			<div id="suiviactions" class="tab-pane fade">
 				<h3>Menu 2</h3>
 				<p>Some content in menu 2.</p>
-
 			</div>
-
 			<div id="services" class="tab-pane fade">
 				<h3>Menu 2</h3>
 				<p>Some content in menu 2.</p>
 			</div>
-
 		</div>
-			</div>
-		<div th:replace="fragments/layout :: footer"></div>
-
+	</div>
+	<div th:replace="fragments/layout :: footer"></div>
+	</div>
 </body>
 </html>

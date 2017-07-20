@@ -1,35 +1,33 @@
 package ecolededev.pe.domaine;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@SuppressWarnings("serial")
 @Entity
-@Table(name = "contact")
-public class Contact implements java.io.Serializable {
+@Table(name="Contacts")
+public class Contact {
 
-	
 	@Id
 	@GeneratedValue
-	private Long id;
-	
+	@Column(name="idContact")
+	private Long idContact;
 	@Column(name="nom")
 	private String nom;
+	@Column(name="prenom")
 	private String prenom;
+	@Column(name="fonction")
 	private String fonction;
+	@Column(name="direction")
 	private String direction;
+	@Column(name="mail")
 	private String mail;
+	@Column(name="mobile")
 	private int mobile;
+	@Column(name="fixe")
 	private int fixe;
+	@Column(name="commentaire")
 	private String commentaire;
+	@Column(name="pe")
 	private boolean pe;
-		
 	
 	public String getNom() {
 		return nom;
@@ -85,7 +83,7 @@ public class Contact implements java.io.Serializable {
 	public void setPe(boolean pe) {
 		this.pe = pe;
 	}
-	
+	public Contact() {};
 	public Contact(String nom, String prenom, String fonction, String direction, String mail, int mobile, int fixe,
 			String commentaire, boolean pe) {
 		this.nom = nom;
@@ -101,20 +99,10 @@ public class Contact implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return "Contact [nom=" + nom + ", prenom=" + prenom + ", fonction=" + fonction + ", direction=" + direction
+		return "Contact [" + idContact + " nom=" + nom + ", prenom=" + prenom + ", fonction=" + fonction + ", direction=" + direction
 				+ ", mail=" + mail + ", mobile=" + mobile + ", fixe=" + fixe + ", commentaire=" + commentaire + ", pe="
 				+ pe + "]";
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Contact() {
-	}
-	
-	
 	
 
 }

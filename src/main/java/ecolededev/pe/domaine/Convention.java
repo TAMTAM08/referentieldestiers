@@ -2,77 +2,63 @@ package ecolededev.pe.domaine;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@SuppressWarnings("serial")
 @Entity
-@Table(name = "convention")
-public class Convention implements java.io.Serializable {
-	
+@Table(name="Conventions")
+public class Convention {
 	@Id
 	@GeneratedValue
-	private Long id;
-
+	@Column(name="idConvention")
+	private Long idConvention;
+	@Column(name="convention")
 	private String convention;
+	@Column(name="objet")
 	private String objet;
+	@Column(name="status")
 	private String status;
-	
-	@OneToOne(fetch=FetchType.EAGER, targetEntity=Contact.class)
-	@JoinColumn(name="convention_id")
-	Contact contact;
-	
-	
+	@OneToMany
+	private List<Contact> listeContacts;
+
+	//	Constructeur
+	public Convention() {}
 	public Convention(String convention, String objet, String status) {
-		
 		this.convention = convention;
 		this.objet = objet;
 		this.status = status;
-	}
+	} // Convention
+
+	//	Getteurs
+	public String getConvention()	{ return convention; }
+	public String getObjet()		{ return objet; }
+	public String getStatus()		{ return status; }
+
+	//	Setters
+	public void setConvention(String convention)	{ this.convention = convention; }
+	public void setObjet(String objet)				{ this.objet = objet; }
+	public void setStatus(String status)			{ this.status = status; }
+
+	//	Autres
 	@Override
 	public String toString() {
-		return "Conventions [convention=" + convention + ", objet=" + objet + ", status=" + status + "]";
+		return "Conventions [" + idConvention + " convention=" + convention + ", objet=" + objet + ", status=" + status + "]";
+	} // toString
+
+	public Long getIdConvention() {
+		return idConvention;
 	}
-	public String getConvention() {
-		return convention;
+
+	public void setIdConvention(Long idConvention) {
+		this.idConvention = idConvention;
 	}
-	public void setConvention(String convention) {
-		this.convention = convention;
+
+	public List<Contact> getListeContacts() {
+		return listeContacts;
 	}
-	public String getObjet() {
-		return objet;
+
+	public void setListeContacts(List<Contact> listeContacts) {
+		this.listeContacts = listeContacts;
 	}
-	public void setObjet(String objet) {
-		this.objet = objet;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Convention() {
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Contact getContact() {
-		return contact;
-	}
-	public void setContact(Contact contact) {
-		this.contact = contact;
-	}
-	
-	
-	
+
+
 }
